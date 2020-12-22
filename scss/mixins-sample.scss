@@ -1,0 +1,104 @@
+/** 
+ * A COLLECTION OF SOME OF MY FAVOURITE SCSS 
+ * MIXINS CREATIONS THAT HAVE SPED UP DEVELOPMENT TIME.
+ *
+ * NOTE: I AVOID BOOTSTRAP IN ORDER TO MAINTAIN A HIGHER 
+ *       DEGREE OF CONTROL OVER DESIGN IMPLEMENTATIONS.
+**/
+
+// ===============
+// * MAP VALUE EXTRACTION *
+// ===============
+
+/// Extract values from within a map to the (n)th layer.
+/// @group Maps
+/// @example
+/// .element {
+///   // example returns 'inline-flex'
+///   display: map-get-deep($grid, "footer" "language-menu" "display");
+/// }
+@function map-get-deep($map, $keys) {
+  @each $key in $keys {
+    $map: map-get($map, $key);
+  }
+  @return $map;
+}
+
+// ===============
+// * MEDIA QUERIES - STYLE ALL SCREENS IN ONE LINE*
+// ===============
+
+/// Min-width for tablet styles.
+/// @group Media-Queries
+/// Helper mixins to apply styles for different screen sizes - mobile first approach.
+$tablet: 768px;
+/// Min-width for desktop styles.
+/// @group Media-Queries
+$desktop: 1024px;
+/// Min-width for jumbo styles.
+/// @group Media-Queries
+$jumbo: 1366px;
+/// Min-width for max site width styles.
+/// @group Media-Queries
+$maxWidth: 1637px;
+
+/// Provide styles for one css property, for mobile tablet and desktop - does not apply styles if screen size param value is set to null.
+/// @group Media-Queries
+/// @param {String} $prop - CSS property being used.
+/// @param {String | null} $sm - Propery value for mobile devices.
+/// @param {String | null} $md - Propery value for tablet devices.
+/// @param {String | null} $lg - Propery value for desktop devices.
+/// @param {null | String} $jb - Propery value for jumbo devices.
+/// @example
+/// .element{
+///
+///   @include style-all("width", "100%", "50%", "33.33%");
+///
+/// }
+@mixin style-all($prop, $sm, $md, $lg, $jb: null) {
+  @if ($sm) {
+    #{$prop}: $sm;
+  }
+  @if ($md) {
+    @include tablet {
+      #{$prop}: $md;
+    }
+  }
+  @if ($lg) {
+    @include desktop {
+      #{$prop}: $lg;
+    }
+  }
+  @if ($jb) {
+    @include jumbo {
+      #{$prop}: $jb;
+    }
+  }
+}
+// ===============
+
+// ===============
+// * RESPONSIVE PADDING *
+// ===============
+$gutters: (
+  "mobile": 8px,
+  "tablet": 16px 20px,
+  "desktop": 24px 30px,
+);
+
+/// Apply default gutters for mobile, tablet, and desktop screen sizes.
+/// @group Gutters
+/// @example
+/// .element {
+///   @include gutters-default;
+///   @include grid-full-width;
+///   @include grid-custom("split" "half", null);
+/// }
+@mixin gutters-default() {
+  @include style-all(
+    "padding",
+    map-get($gutters, "mobile"),
+    map-get($gutters, "tablet"),
+    map-get($gutters, "desktop")
+  );
+}

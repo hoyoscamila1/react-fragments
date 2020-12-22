@@ -1,0 +1,70 @@
+.language-menu-wrapper {
+  display: flex;
+  justify-content: center;
+  @include style-all("grid-column-start", 1, null, null);
+  @include style-all("grid-column-end", 2, 9, 13);
+
+  .icon {
+    color: $bluey-grey;
+  }
+
+  .language-menu {
+    display: inline-flex;
+    align-items: flex-start;
+
+    .globe {
+      margin: 0 12px 0 0;
+      @include style-all("width", 30px, null, 32px);
+    }
+
+    .dropdown {
+      user-select: none;
+
+      &-item {
+        display: flex;
+        padding: 8px;
+        align-items: center;
+        color: $greyish-blue;
+        background: $light-grey;
+        justify-content: space-between;
+        @include style-all(
+          "font-size",
+          map-get($default, "caption"),
+          null,
+          map-get($default, "small-mobile")
+        );
+
+        &.active {
+          text-align: left;
+          position: relative;
+          border: $language-menu-border;
+
+          .chevron-down {
+            padding-left: 6px;
+            fill: $bluey-grey;
+            @include style-all("width", 12px, null, 14px);
+          }
+        }
+      }
+
+      .options {
+        z-index: $z-lang-menu-option;
+        border-bottom: $language-menu-border;
+
+        .dropdown-item {
+          border: $language-menu-border;
+          border-top: none;
+          border-bottom: none;
+        }
+
+        &-open {
+          display: block;
+        }
+
+        &-closed {
+          display: none;
+        }
+      }
+    }
+  }
+}
