@@ -12,11 +12,18 @@ A sample language menu toggle component based on the graphql output and page con
 
 Uses:
 
-- React.js
+- React
+- TypeScript
+- Gatsby
 - Jest + Enzyme
 - SCSS
-- Storybook.js
+- Storybook
 
 ## `./scss`
 
 A collection of some mixins used instead of Bootstrap for speedy development.
+
+Uses: 
+
+- SCSS
+- SassDoc
