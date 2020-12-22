@@ -6,7 +6,7 @@
  */
 
 const path = require(`path`)
-const queryAll = require(`./graphql-sample.js`)
+const querySample = require(`./graphql-sample.js`)
 
 // @TODO: Remove once allPages is introduced
 const pathPrefix = (lang) => (lang !== "en" ? lang : "")
